@@ -18,6 +18,8 @@ import java.awt.event.ActionEvent;
 
 import escalonadores.Processo;
 import escalonadores.MainSJF;
+import escalonadores.MainSRTN;
+
 import javax.swing.JScrollPane;
 
 public class Escalonador extends JPanel {
@@ -124,11 +126,14 @@ public class Escalonador extends JPanel {
 						listaEscalonador.get(i).setEscalonador("SJF");
 					}
 					novaLista = mainsjf.execute(listaEscalonador);
-					//chamar SJF
-				}
-				else if(index == 1) {
-					System.out.println("SRTN");
-					//chamar SRTN
+					
+				} else if(index == 1) {
+					System.out.println("SRTN");					
+					for ( int i = 0; i < listaEscalonador.size(); i++ ) {
+						listaEscalonador.get(i).setEscalonador("SJF");
+					}
+					MainSRTN mainsrtn = new MainSRTN(listaEscalonador, listaEscalonador.size());
+					novaLista = mainsrtn.execute(listaEscalonador);
 				}
 				else if(index == 2) {
 					System.out.println("RR");

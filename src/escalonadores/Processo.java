@@ -60,8 +60,13 @@ public class Processo extends Thread{
 			this.tempoAtual += burstTime;
 			this.finishTime = tempoAtual;
 			this.turnAround = finishTime - arrivalTime;
-		} else if ( escalonador == "ORIENTACAO A OBJETO EH MEU PAU" ) {
 			
+		} else if ( escalonador == "SRTN" ) {
+			tempoRestante--;
+			if ( tempoRestante == 0 ) {
+				finishTime = tempoAtual;
+				turnAround = finishTime - tempoInicio;
+			}
 		}
 	}
 	
