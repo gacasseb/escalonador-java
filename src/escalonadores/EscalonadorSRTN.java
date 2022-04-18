@@ -44,7 +44,7 @@ public class EscalonadorSRTN extends Thread {
     {
         int tempo = 0, processosCompletos = 0;
 
-        System.out.println("Começou o escalonador.");
+        System.out.println("Começou o escalonado SRTN.");
 
         while (processosCompletos != totalProcesso)
         {
@@ -75,6 +75,7 @@ public class EscalonadorSRTN extends Thread {
                 novoProcesso.setFinishTime(processo.getFinishTime() + 1);
                 novoProcesso.setTempoInicio(processo.getTempoInicio());
                 novoProcesso.setTurnAround(processo.getTurnAround() + 1);
+                novoProcesso.setEscalonador(processo.getEscalonador());
 
                 listaProcesso.set(indexProcesso, novoProcesso);
             }

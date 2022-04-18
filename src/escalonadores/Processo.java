@@ -102,6 +102,10 @@ public class Processo extends Thread{
 		return this.tempoInicio;
 	}
 	
+	public String getEscalonador() {
+		return this.escalonador;
+	}
+	
 	public void setTurnAround(int turnAround) {
 		this.turnAround = turnAround;
 	}

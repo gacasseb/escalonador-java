@@ -97,7 +97,7 @@ public class Escalonador extends JPanel {
 				    {
 						int linha = evt.getFirstRow();
 						int coluna = evt.getColumn();
-						if(linha >= 0 && coluna > 0) {
+						if(linha >= 0 && coluna >= 0) {
 							int valor = Integer.parseInt((String) tableEntrada.getModel().getValueAt(linha, coluna));
 							if(coluna == 0) {
 								listaAtual.get(linha).setArrivalTime(valor);
@@ -130,8 +130,10 @@ public class Escalonador extends JPanel {
 				} else if(index == 1) {
 					System.out.println("SRTN");					
 					for ( int i = 0; i < listaEscalonador.size(); i++ ) {
-						listaEscalonador.get(i).setEscalonador("SJF");
+						listaEscalonador.get(i).setEscalonador("SRTN");
+						listaEscalonador.get(i).setTempoRestante(listaEscalonador.get(i).getBurstTime());
 					}
+					System.out.println("Entrou aqui!");
 					MainSRTN mainsrtn = new MainSRTN(listaEscalonador, listaEscalonador.size());
 					novaLista = mainsrtn.execute(listaEscalonador);
 				}

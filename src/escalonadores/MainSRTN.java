@@ -41,12 +41,13 @@ public class MainSRTN {
     }
 	
 	public static LinkedList<Processo>execute(LinkedList<Processo> listaProcessos) {
-		EscalonadorSJF escalonador;
+		EscalonadorSRTN escalonador;
 		
-		escalonador = new EscalonadorSJF(listaProcessos, listaProcessos.size());
+		escalonador = new EscalonadorSRTN(listaProcessos, listaProcessos.size());
 		escalonador.start();
 		while(escalonador.isAlive()) ;
-		listaProcessos = escalonador.getListaCPU();
+		System.out.println("Acabou essa porra");
+		listaProcessos = escalonador.getListaProcesso();
 		
 		return listaProcessos;
 	}
