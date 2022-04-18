@@ -41,6 +41,7 @@ public class TabelaResultados extends JPanel {
 	}
 	
 	public void showResultados(LinkedList<Processo> processos) {
+		model.setRowCount(0);
 		for(int i = 0; i < processos.size(); i++) {
 			model.addRow(new Object[]{processos.get(i).getIdProcesso(), processos.get(i).getArrivalTime(), processos.get(i).getFinishTime(), processos.get(i).getBurstTime(), processos.get(i).getTurnAround()});
 		}

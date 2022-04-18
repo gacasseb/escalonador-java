@@ -17,6 +17,8 @@ import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 
 import escalonadores.Processo;
+import escalonadores.MainPrioridade;
+import escalonadores.MainRR;
 import escalonadores.MainSJF;
 import escalonadores.MainSRTN;
 
@@ -83,7 +85,24 @@ public class Escalonador extends JPanel {
 				nProcessos = Integer.parseInt(nProcessosTxtField.getText());
 				listaAtual.clear();
 				model.setRowCount(0);
-				Processo.scanTempoAleatorio(listaAtual, nProcessos);
+				int index = cmbBoxEscalonadores.getSelectedIndex();
+				switch(index) {
+				case 0: // Processos SJF!!
+					Processo.scanTempoAleatorio(listaAtual, nProcessos);
+					break;
+				case 1: // Processos SRTN!!
+					Processo.scanTempoAleatorio(listaAtual, nProcessos);
+					break;
+				case 2: // Processos RR!!
+					Processo.scanTempoAleatorio(listaAtual, nProcessos, 0);
+					break;
+				case 3: // Processos Prioridade!!
+					Processo.scanTempoAleatorio(listaAtual, nProcessos, 0, 0);
+					break;
+				case 4: // Processos Multiplas Filas!!
+					Processo.scanTempoAleatorio(listaAtual, nProcessos);
+					break;
+				}
 				
 				for(int i = 0; i < listaAtual.size(); i++) {
 					model.addRow(new Object[]{listaAtual.get(i).getArrivalTime(), listaAtual.get(i).getBurstTime()});
@@ -103,6 +122,7 @@ public class Escalonador extends JPanel {
 								listaAtual.get(linha).setArrivalTime(valor);
 							} else {
 								listaAtual.get(linha).setBurstTime(valor);
+								listaAtual.get(linha).setTempoRestante(valor);
 							}
 						}
 				    }
@@ -138,11 +158,22 @@ public class Escalonador extends JPanel {
 				}
 				else if(index == 2) {
 					System.out.println("RR");
-					//chamar RR
+					int quantum = listaEscalonador.get(0).getQuantum();
+					System.out.println("RR");
+					for ( int i = 0; i < listaEscalonador.size(); i++ ) {
+						listaEscalonador.get(i).setEscalonador("RR");
+					}
+					MainRR mainrr = new MainRR();
+					novaLista = mainrr.execute(listaEscalonador, quantum);
 				}
 				else if(index == 3) {
+					int quantum = listaEscalonador.get(0).getQuantum();
 					System.out.println("Prioridade");
-					//chamar Prioridade
+					for ( int i = 0; i < listaEscalonador.size(); i++ ) {
+						listaEscalonador.get(i).setEscalonador("Prioridade");
+					}
+					MainPrioridade mainPrioridade = new MainPrioridade();
+					novaLista = mainPrioridade.execute(listaEscalonador, quantum);
 				}
 				else if(index == 4) {
 				}

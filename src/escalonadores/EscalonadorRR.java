@@ -75,6 +75,7 @@ public class EscalonadorRR extends Thread{
 					tempo += quantum;
 					Processo copia = new Processo(aux.getIdProcesso(), aux.getArrivalTime(),
 										 aux.getBurstTime(), aux.getTempoRestante(), quantum);
+					copia.setEscalonador(aux.getEscalonador());
 					inserirCPU(tempo); // antes de reinserir o processo na lista, analisar caso tenha algum novo que tenha chegado!!
 					listaCPU.add(copia);
 					totalCPU++;

@@ -56,7 +56,7 @@ public class Processo extends Thread{
 	}
 	
 	public void run() {
-		if ( escalonador == "SJF" ) {			
+		if ( escalonador == "SJF" ) {
 			this.tempoAtual += burstTime;
 			this.finishTime = tempoAtual;
 			this.turnAround = finishTime - arrivalTime;
@@ -66,6 +66,13 @@ public class Processo extends Thread{
 			if ( tempoRestante == 0 ) {
 				finishTime = tempoAtual;
 				turnAround = finishTime - tempoInicio;
+			}
+		} else if (escalonador == "RR" || escalonador == "Prioridade") {
+			tempoRestante -= quantum;
+			if(tempoRestante <= 0) {
+				finishTime = (tempoRestante + quantum) + tempoAtual;
+				turnAround = finishTime - arrivalTime;
+				tempoRestante = 0;
 			}
 		}
 	}
@@ -100,6 +107,10 @@ public class Processo extends Thread{
 	
 	public int getTempoInicio() {
 		return this.tempoInicio;
+	}
+
+	public int getQuantum() {
+		return this.quantum;
 	}
 	
 	public String getEscalonador() {
@@ -159,6 +170,36 @@ public class Processo extends Thread{
 			burstTime = rand.nextInt(50);
 			burstTime++; // para nao pegar resultado 0!!
 			Processo x = new Processo(i+1, arrivalTime, burstTime);
+			listaProcessos.add(x);
+		}
+	}
+
+	public static void  scanTempoAleatorio(LinkedList<Processo> listaProcessos, int totalProcessos, int quantum) {
+		int arrivalTime, burstTime;
+		Random rand = new Random();
+		quantum = rand.nextInt(20);
+		quantum++; // para nao pegar resultado 0!!
+		for(int i = 0; i < totalProcessos; i++) {
+			arrivalTime = rand.nextInt(101);
+			burstTime = rand.nextInt(50);
+			burstTime++; // para nao pegar resultado 0!!
+			Processo x = new Processo(i+1, arrivalTime, burstTime, burstTime, quantum);
+			listaProcessos.add(x);
+		}
+	}
+	
+	public static void  scanTempoAleatorio(LinkedList<Processo> listaProcessos, int totalProcessos, int prioridade, int quantum) {
+		int arrivalTime, burstTime;
+		Random rand = new Random();
+		quantum = rand.nextInt(20);
+		quantum++; // para nao pegar resultado 0!!
+		for(int i = 0; i < totalProcessos; i++) {
+			arrivalTime = rand.nextInt(101);
+			burstTime = rand.nextInt(50);
+			burstTime++; // para nao pegar resultado 0!!
+			prioridade = rand.nextInt(10);
+			prioridade++;
+			Processo x = new Processo(i+1, arrivalTime, burstTime, burstTime, quantum, prioridade);
 			listaProcessos.add(x);
 		}
 	}

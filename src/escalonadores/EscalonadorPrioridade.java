@@ -124,6 +124,7 @@ public class EscalonadorPrioridade extends Thread{
 							tempo += quantum;
 							Processo copia = new Processo(aux.getIdProcesso(), aux.getArrivalTime(), aux.getBurstTime(), 
 														  aux.getTempoRestante(), quantum, aux.getPrioridade());
+							copia.setEscalonador(aux.getEscalonador());
 							inserirListasPrioridade(tempo);
 							listasPrioridade.get(i).add(copia);
 							break;
