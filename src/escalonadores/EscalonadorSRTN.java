@@ -6,17 +6,29 @@ public class EscalonadorSRTN extends Thread {
 
     private int totalProcesso;
     private LinkedList<Processo> listaProcesso;
+    private int tempo;
 
     EscalonadorSRTN(LinkedList<Processo> listaProcesso, int totalProcesso)
     {
         this.totalProcesso = totalProcesso;
         this.listaProcesso = listaProcesso;
+        this.tempo = 0;
+    }
+    
+    public int getTempo()
+    {
+    	return this.tempo;
     }
 
     public LinkedList<Processo> getListaProcesso()
     {
 		return this.listaProcesso;
 	}
+    
+    public void setTempo(int tempo)
+    {
+    	this.tempo = tempo;
+    }
 
     public int getLastProcess(int tempoAtual)
     {
@@ -42,9 +54,9 @@ public class EscalonadorSRTN extends Thread {
 
     public void run()
     {
-        int tempo = 0, processosCompletos = 0;
+        int processosCompletos = 0;
 
-        System.out.println("Começou o escalonado SRTN.");
+        System.out.println("Começou o escalonador SRTN.");
 
         while (processosCompletos != totalProcesso)
         {
@@ -82,5 +94,7 @@ public class EscalonadorSRTN extends Thread {
 
             tempo++;
         }
+        
+        System.out.println("Finalizou o escalonador SRTN.");
     }
     }

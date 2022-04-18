@@ -30,7 +30,7 @@ public class MainSRTN {
             processo = this.listaProcesso.get(i);
             int tempoRestante = processo.getTempoRestante();
 
-            // Procura pelo processo que já pode ser iniciado, não está completo e tem o menor tempo restante
+            // Procura pelo processo que jï¿½ pode ser iniciado, nï¿½o estï¿½ completo e tem o menor tempo restante
             if ( tempoAtual >= processo.getArrivalTime() && !processo.isComplete() && (tempoRestante < menorTempo || menorTempo == -1) ) {
                 menorTempo = tempoRestante;
                 index = i;
@@ -46,7 +46,6 @@ public class MainSRTN {
 		escalonador = new EscalonadorSRTN(listaProcessos, listaProcessos.size());
 		escalonador.start();
 		while(escalonador.isAlive()) ;
-		System.out.println("Acabou essa porra");
 		listaProcessos = escalonador.getListaProcesso();
 		
 		return listaProcessos;

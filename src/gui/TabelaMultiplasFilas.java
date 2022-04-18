@@ -45,7 +45,7 @@ public void showResultados(LinkedList<FilaSRTN> filas) {
 	modelMultiplas.setRowCount(0);
 	for(int i = 0; i < filas.size(); i++) {
 		for(int j = 0; j < filas.get(i).getNProcessos(); j++) {
-			modelMultiplas.addRow(new Object[] {i, j, filas.get(i).getProcessos().get(j).getPrioridade(),  filas.get(i).getProcessos().get(j).getArrivalTime(),  filas.get(i).getProcessos().get(j).getFinishTime(),  filas.get(i).getProcessos().get(j).getBurstTime(),  filas.get(i).getProcessos().get(j).getTurnAround() });
+			modelMultiplas.addRow(new Object[] {i, j, filas.get(i).getPrioridade(),  filas.get(i).getProcessos().get(j).getArrivalTime(),  filas.get(i).getProcessos().get(j).getFinishTime(),  filas.get(i).getProcessos().get(j).getBurstTime(),  filas.get(i).getProcessos().get(j).getTurnAround() });
 		}
 	}
 }

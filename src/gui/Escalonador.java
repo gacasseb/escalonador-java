@@ -133,7 +133,6 @@ public class Escalonador extends JPanel {
 						listaEscalonador.get(i).setEscalonador("SRTN");
 						listaEscalonador.get(i).setTempoRestante(listaEscalonador.get(i).getBurstTime());
 					}
-					System.out.println("Entrou aqui!");
 					MainSRTN mainsrtn = new MainSRTN(listaEscalonador, listaEscalonador.size());
 					novaLista = mainsrtn.execute(listaEscalonador);
 				}
@@ -146,8 +145,6 @@ public class Escalonador extends JPanel {
 					//chamar Prioridade
 				}
 				else if(index == 4) {
-					System.out.println("Multiplas filas");
-					//chamar Multiplas Filas
 				}
 				tabelaResultados.showResultados(novaLista);
 			}

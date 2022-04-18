@@ -7,6 +7,7 @@ public class FilaSRTN extends Fila implements Runnable {
     private int prioridade;
     private int totalProcessos;
     private LinkedList<Processo> processos;
+    public int id;
 
     // public FilaSRTN(LinkedList processos, int prioridade, int totalProcessos)
     // {
@@ -35,7 +36,7 @@ public class FilaSRTN extends Fila implements Runnable {
     public int getNProcessos() {
     	return this.totalProcessos;
     }
-
+    
     public void setPrioridade(int prioridade)
     {
         this.prioridade = prioridade;

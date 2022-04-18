@@ -9,6 +9,8 @@ import javax.swing.table.DefaultTableModel;
 import escalonadores.FilaSRTN;
 import escalonadores.Processo;
 import escalonadores.Lista;
+import escalonadores.MainFilas;
+import escalonadores.MainSRTN;
 import gui.TabelaMultiplasFilas;
 
 import javax.swing.JScrollPane;
@@ -166,8 +168,18 @@ public class MultiplasFilas extends JPanel {
 		JButton btnIniciar = new JButton("Iniciar");
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LinkedList<FilaSRTN> novaLista = new LinkedList<FilaSRTN>();
 				//chamarSRTN
-				tabelaMultiplas.showResultados(listaMultiplas);
+				for ( int i = 0; i < listaMultiplas.size(); i++ ) {
+					LinkedList<Processo> listaProcessos = listaMultiplas.get(i).getProcessos();
+					for ( int j = 0; j < listaProcessos.size(); j++ ) {
+						listaProcessos.get(j).setEscalonador("SRTN");
+						listaProcessos.get(j).setTempoRestante(listaProcessos.get(j).getBurstTime());
+					}
+					listaMultiplas.get(i).setProcessos(listaProcessos);
+				}
+				novaLista = MainFilas.execute(listaMultiplas);
+				tabelaMultiplas.showResultados(novaLista);
 			}
 		});
 		btnIniciar.setBounds(429, 266, 89, 23);
